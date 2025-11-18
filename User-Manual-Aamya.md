@@ -1,4 +1,4 @@
-# User Manual for Aamya
+# My User Manual
 
 ## My Role
 I am working as an intern focusing on Web Development.
