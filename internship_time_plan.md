@@ -10,37 +10,37 @@ This document outlines my detailed weekly time plan for the Focus Bear internshi
 
 # Week-by-Week Plan
 
-## Week 1 (18 Nov – 22 Nov)
+### Week 1 (18 Nov – 22 Nov)
 Work Days: Tuesday, Wednesday, Thursday, Friday  
 Hours: 8:30 AM – 4:30 PM IST  
 Location: Home
 
-## Week 2 (24 Nov – 28 Nov)
+### Week 2 (24 Nov – 28 Nov)
 Work Days: Monday to Friday  
 Hours: 8:30 AM – 4:30 PM IST  
 Location: Home
 
-## Week 3 (1 Dec – 5 Dec)
+### Week 3 (1 Dec – 5 Dec)
 Work Days: Monday to Friday  
 Hours: 8:30 AM – 4:30 PM IST  
 Location: Home
 
-## Week 4 (8 Dec – 12 Dec)
+### Week 4 (8 Dec – 12 Dec)
 Work Days: Monday to Friday  
 Hours: 8:30 AM – 4:30 PM IST  
 Location: Home
 
-## Week 5 (15 Dec – 19 Dec)
+### Week 5 (15 Dec – 19 Dec)
 Work Days: Monday to Friday  
 Hours: 8:30 AM – 4:30 PM IST  
 Location: Home
 
-## Week 6 (22 Dec – 26 Dec)
+### Week 6 (22 Dec – 26 Dec)
 Work Days: Monday, Tuesday, Wednesday, Thursday, Friday  
 Hours: 8:30 AM – 4:30 PM IST  
 Location: Home
 
-## Week 7 (29 Dec – 30 Dec)
+### Week 7 (29 Dec – 30 Dec)
 Work Days: Monday, Tuesday  
 Hours: 8:30 AM – 4:30 PM IST  
 Location: Home
@@ -52,4 +52,4 @@ Minimum internship hours required - 225
 This time plan ensures that I meet the required internship hours.
 
 # Time Logging
-I will use the Focus Bear app to track all working sessions. Each time I begin internship work, I will start a Focus Bear session so that all hours are logged accurately. This will serve as evidence of my commitment and progress throughout the internship.
+I will use the Focus Bear app to track working sessions.
