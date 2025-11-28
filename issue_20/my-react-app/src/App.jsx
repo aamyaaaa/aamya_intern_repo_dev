@@ -1,4 +1,5 @@
 import Counter from './Counter'
+import ParentBuggy from './buggy/ParentBuggy'
 
 function App() {
   return (
@@ -11,7 +12,14 @@ function App() {
           Tailwind & Redux are set up correctly!
         </p>
       </div>
+
+      {/* Redux counter */}
       <Counter />
+
+      {/* Buggy / fixed React debugging example */}
+      <div className="bg-white rounded-xl shadow-lg p-8 text-center mt-4">
+        <ParentBuggy />
+      </div>
     </div>
   )
 }
