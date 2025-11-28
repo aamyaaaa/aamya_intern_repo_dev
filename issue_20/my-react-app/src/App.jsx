@@ -1,5 +1,7 @@
 import Counter from './Counter'
 import ParentBuggy from './buggy/ParentBuggy'
+import HelloWorld from './HelloWorld'
+
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
           Tailwind & Redux are set up correctly!
         </p>
       </div>
-
+    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center gap-8">
+      <HelloWorld name="Focus Bear" />
+    </div>
       {/* Redux counter */}
       <Counter />
 
