@@ -1,6 +1,7 @@
 import Counter from './Counter'
 import ParentBuggy from './buggy/ParentBuggy'
 import HelloWorld from './HelloWorld'
+import ExpensiveList from './ExpensiveList'
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
     </div>
       {/* Redux counter */}
       <Counter />
+
+      <ExpensiveList />
 
       {/* Buggy / fixed React debugging example */}
       <div className="bg-white rounded-xl shadow-lg p-8 text-center mt-4">
