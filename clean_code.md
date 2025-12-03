@@ -6,6 +6,35 @@ Learn when and how to write helpful comments and documentation in code.
 ### Key Learning
 Comments should be used to explain the purpose behind a piece of code, not to repeat what the code already shows.  
 When code is unclear, it is often better to improve the code itself by using meaningful naming or breaking down complex logic instead of adding extra comments.
+## Example of Improving Comments
+
+### Poorly Commented Code (Unhelpful comments)
+
+// add one
+function a(x) {
+  // do math
+  return x + 1 // return
+}
+
+Problems:
+- Comments repeat what the code already says
+- Function and variable names are unclear
+- No explanation of why this exists
+- Improved Version (Clear purpose and better naming)
+
+
+// Increases a user's point count by 1
+function increaseUserPoints(currentPoints) {
+  // We return a new value instead of modifying the original
+  return currentPoints + 1;
+}
+
+Improvements:
+- Clear function name
+- Clear parameter name
+- Comment explains the purpose, not the code
+- More meaningful and readable
+
 
 ## issue 27 log
 ### Handling Errors and Edge Cases
