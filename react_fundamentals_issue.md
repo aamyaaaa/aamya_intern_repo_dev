@@ -11,3 +11,17 @@ Modifying arrays directly (e.g., using `push`) can cause bugs.
 Instead, React requires immutable updates, like:
 js
 setItems([...items, newItem])
+
+### 3. **Empty or invalid input**
+
+If input isn't validated, you may end up adding blank list items.
+Adding checks prevents this and makes the UI cleaner.
+
+### 4. **Poor performance with large lists**
+
+Re-rendering very large lists can slow the app down.
+Using techniques like memoization helps — but only when necessary.
+
+### 5. **Removing or updating items incorrectly**
+
+Forgetting proper state updates can lead to inconsistent UI if not handled correctly.
