@@ -129,3 +129,73 @@ While testing the `calculateDiscount` function, I discovered:
 - Writing tests made me think more deeply about **edge cases** that I might have missed
 
 After updating the function and improving validation, all tests passed — showing that the function is now more reliable and cleaner in design.
+
+
+##  issue 32
+## Avoiding Code Duplication (DRY Principle)
+
+### DRY Principle
+
+The Don't Repeat Yourself (DRY) principle means that the same piece of logic should not be copy-pasted in multiple places.  
+Instead, it should live in a single, clear function or module. This reduces bugs and makes changes easier.
+
+
+### Example of Duplicated Code (Before Refactor)
+
+// Before: duplicated email validation logic
+
+function registerUser(user) {
+  if (!user.email || !user.email.includes('@') || !user.email.includes('.')) {
+    throw new Error('Invalid email')
+  }
+  // ... more registration logic
+}
+
+function sendWelcomeEmail(user) {
+  if (!user.email || !user.email.includes('@') || !user.email.includes('.')) {
+    throw new Error('Invalid email')
+  }
+  // ... logic to send welcome email
+}
+
+### What were the issues with this duplicated code?
+
+- The email validation logic is repeated in two functions.
+
+- If the email rule needs to change (e.g. more strict validation), I would have to update it in multiple places.
+
+- There is a risk that one place gets updated and another is forgotten, causing inconsistent behavior.
+
+- It makes the code harder to maintain and reason about.
+
+### Refactored code:
+// Shared helper for email validation
+function isValidEmail(email) {
+  return typeof email === 'string' && email.includes('@') && email.includes('.')
+}
+
+function registerUser(user) {
+  if (!isValidEmail(user.email)) {
+    throw new Error('Invalid email')
+  }
+  // ... more registration logic
+}
+
+function sendWelcomeEmail(user) {
+  if (!isValidEmail(user.email)) {
+    throw new Error('Invalid email')
+  }
+  // ... logic to send welcome email
+}
+
+### How did refactoring improve maintainability?
+
+- The validation rule now lives in one place: isValidEmail.
+
+- If I need to change the validation logic, I only update the helper function.
+
+- The main functions (registerUser, sendWelcomeEmail) are cleaner and more focused on their primary responsibilities.
+
+- The code is easier to read, test, and extend in the future.
+
+- By removing duplication, the code became more reliable and much easier to maintain.
