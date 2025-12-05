@@ -105,3 +105,27 @@ By validating input:
 - The function always returns a correct and meaningful value
 
 - This makes the entire application more stable and predictable.
+
+## Unit Testing Reflection
+
+### How do unit tests help keep code clean?
+
+Unit tests make sure that each part of the code behaves correctly before it is used inside the application. By writing tests:
+
+- I focus more on the **logic and expected behavior** of functions
+- I catch mistakes early, before they break the UI
+- Code becomes easier to **refactor**, because tests will alert me if something stops working
+- It encourages writing **smaller, reusable functions** that are easier to test
+
+Overall, unit tests act like a safety net — if someone changes code later, tests ensure no new bugs are introduced.
+
+
+### What issues did you find while testing?
+
+While testing the `calculateDiscount` function, I discovered:
+
+- The first version did not handle **invalid values** like negative prices or discount percentages over 100%
+- I realized I needed **proper error handling** to prevent unexpected results
+- Writing tests made me think more deeply about **edge cases** that I might have missed
+
+After updating the function and improving validation, all tests passed — showing that the function is now more reliable and cleaner in design.
