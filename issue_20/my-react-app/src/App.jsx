@@ -4,6 +4,7 @@ import ParentBuggy from './buggy/ParentBuggy'
 import HelloWorld from './HelloWorld'
 import ExpensiveList from './ExpensiveList'
 import UserList from "./UserList";
+import UseCallbackDemo from './UseCallbackDemo'
 
 import { useTranslation } from 'react-i18next'; // 👈 NEW
 
@@ -36,14 +37,14 @@ function App() {
 
         <UserList />
       </div>
-
+      <UseCallbackDemo />
       <div className="bg-white rounded-xl shadow-lg p-8 text-center">
         <HelloWorld name="Focus Bear" />
       </div>
 
       {/* Redux counter */}
       <Counter />
-
+      
       <ExpensiveList />
 
       {/* Buggy / fixed React debugging example */}
