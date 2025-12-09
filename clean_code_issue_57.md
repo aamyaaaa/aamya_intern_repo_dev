@@ -1,99 +1,120 @@
 # Refactoring Code for Simplicity
 
-## Why refactoring matters
-Refactoring improves code by making it **simpler, clearer, and easier to maintain**, without changing what the code actually does.  
-It helps reduce confusion and makes future updates safer and faster.
+## Why Refactoring Matters
+Refactoring improves code readability and maintainability without changing functionality.  
+It helps reduce duplication, separate responsibilities, and make future updates easier.
 
-## Before Refactoring — Complex Code
-// Overly complicated function handling multiple things at once
-function applyDiscount(user, cart, discountCode) {
-  let total = 0
-  let hasDiscount = false
-  let discountValue = 0
+## Original Code (Before Refactoring)
+The original `Counter.jsx` mixed UI, business logic, and repetitive button elements in one place.
 
-  for (let i = 0; i < cart.items.length; i++) {
-    const item = cart.items[i]
-    if (item.quantity > 0) {
-      total = total + item.price * item.quantity
-    }
-  }
+```jsx
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, decrement, reset } from './store/counterSlice'
 
-  if (discountCode) {
-    if (discountCode === 'WELCOME10') {
-      if (user.isNewUser === true) {
-        hasDiscount = true
-        discountValue = 0.1
-      }
-    } else if (discountCode === 'VIP20') {
-      if (user.isVip === true && total > 100) {
-        hasDiscount = true
-        discountValue = 0.2
-      }
-    }
-  }
+function Counter() {
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
 
-  if (hasDiscount === true) {
-    total = total - total * discountValue
-  }
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+      <h1 className="text-3xl font-bold text-white">Redux Counter</h1>
+      <p className="text-2xl text-white">Count: {count}</p>
 
-  return {
-    total: total,
-    discountApplied: hasDiscount,
-  }
+      <div className="flex gap-2">
+        <button
+          className="px-4 py-2 rounded bg-green-600 text-white"
+          onClick={() => dispatch(increment())}
+        >
+          +1
+        </button>
+        <button
+          className="px-4 py-2 rounded bg-red-600 text-white"
+          onClick={() => dispatch(decrement())}
+        >
+          -1
+        </button>
+        <button
+          className="px-4 py-2 rounded bg-gray-500 text-white"
+          onClick={() => dispatch(reset())}
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+  )
 }
 
-### Why this was complex
-- Too many responsibilities inside **one** function  
-- Nested `if` conditions make the logic hard to follow  
-- Temporary flags (`hasDiscount`, `discountValue`) being changed in multiple places  
-- Hard to extend or reuse later  
+export default Counter
+```
+
+### Issues in Original Code
+- Inline anonymous functions recreated on every render
+- Repeated button markup with only minor changes
+- Mixing Redux logic directly in JSX
+- Hard to change or reuse UI components
 
 
-## After Refactoring — Simpler & Clearer
+## Refactored Code (After Improvement)
+Logic is now separated from UI. Buttons are reusable and handlers are clearly named.
 
-function calculateCartTotal(cart) {
-  return cart.items.reduce((sum, item) => {
-    if (item.quantity <= 0) return sum
-    return sum + item.price * item.quantity
-  }, 0)
+```jsx
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, decrement, reset } from './store/counterSlice'
+
+function ActionButton({ label, onClick, color }) {
+  return (
+    <button
+      className={`px-4 py-2 rounded text-white bg-${color}-600`}
+      onClick={onClick}
+    >
+      {label}
+    </button>
+  )
 }
 
-function getDiscountRate(user, total, discountCode) {
-  if (!discountCode) return 0
+function Counter() {
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
 
-  if (discountCode === 'WELCOME10' && user.isNewUser) return 0.1
-  if (discountCode === 'VIP20' && user.isVip && total > 100) return 0.2
+  const handleIncrement = () => dispatch(increment())
+  const handleDecrement = () => dispatch(decrement())
+  const handleReset = () => dispatch(reset())
 
-  return 0
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+      <h1 className="text-3xl font-bold text-white">Redux Counter</h1>
+      <p className="text-2xl text-white">Count: {count}</p>
+
+      <div className="flex gap-2">
+        <ActionButton label="+1" onClick={handleIncrement} color="green" />
+        <ActionButton label="-1" onClick={handleDecrement} color="red" />
+        <ActionButton label="Reset" onClick={handleReset} color="gray" />
+      </div>
+    </div>
+  )
 }
 
-function applyDiscount(user, cart, discountCode) {
-  const total = calculateCartTotal(cart)
-  const discountRate = getDiscountRate(user, total, discountCode)
+export default Counter
+```
 
-  return {
-    total: total - total * discountRate,
-    discountApplied: discountRate > 0,
-  }
-}
+---
+
+## Improvements Achieved
+| Before | After |
+|--------|-------|
+| Duplicate button code | Reusable `ActionButton` component |
+| Dispatch actions inline | Clear named handlers |
+| UI and logic mixed together | Better separation of concerns |
+| Harder to maintain or update | Clean, readable structure |
 
 ## Reflection
+The original code was more complex than necessary because:
+- It combined several responsibilities in one component
+- Updating one UI element required editing multiple lines
 
-### What made the original code complex?
-- It mixed **different jobs**: calculating total + checking discounts + updating state + logging
-- Hard to understand because all logic lived in one place
-- Changing or adding new discounts would require rewriting more code
+Refactoring improved the structure by:
+- Making dispatch logic easy to locate and reuse
+- Allowing future styling changes to be done in one place
+- Reducing cognitive load when reading the component
 
-### How refactoring improved the code
-- Separated logic into **three smaller functions** with clear purposes
-- Easier to **read**, **test**, and **reuse**
-- The main function now feels like a **simple checklist**:
-  1️Calculate total  
-  2️Check discount  
-  3️Return result  
-- Future changes (like new discount rules) are much simpler to implement
-
-
-## Final takeaway
-Refactoring didn’t change the feature — just made the structure cleaner.  
-This helps developers understand, maintain, and improve the code confidently in the future.
+Overall, the refactor made the code more maintainable and easier to extend.
