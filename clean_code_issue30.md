@@ -1,95 +1,125 @@
-# Writing Small, Focused Functions
+# Writing Small, Focused Functions - Issue #30
 
 ## Why breaking down functions is beneficial
 
-Breaking a large function into smaller, single-purpose functions makes the code:
+Breaking a large or “busy” function into smaller, single-purpose functions makes the code:
 
-- **Easier to read**  each function does one clear thing
-- **Easier to test**  you can write unit tests for small pieces instead of one giant block
-- **Easier to reuse**  small functions can be called from different parts of the app
-- **Easier to change** if one part of the logic needs updating, you only touch one place
+- Easier to read: each function does one clear thing.
+- Easier to test: small functions can be tested in isolation.
+- Easier to reuse: logic can be called from other places without copying.
+- Easier to change: updates are made in one focused place rather than inside a big block.
 
-It also forces us to think more clearly about the steps in your logic, instead of hiding everything inside one long function.
+It also forces clearer thinking about what each step of the logic is responsible for.
 
+## Before Refactoring (All logic in one component) 
 
-## Example: Before Refactoring (Long Function)
+Originally, my `MessageButton` component handled UI, message formatting, and click logic in one place:
 
-// Before: one long function doing too many things
-function processOrders(orders) {
-  // 1. Filter valid orders
-  const validOrders = []
-  for (let i = 0; i < orders.length; i++) {
-    if (orders[i].status === 'paid' && orders[i].total > 0) {
-      validOrders.push(orders[i])
-    }
+```jsx
+// src/MessageButton.jsx (before)
+import React, { useState } from "react";
+
+function MessageButton() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h1>Focus Bear Test Component</h1>
+      <p data-testid="message">
+        You have clicked the button {count} {count === 1 ? "time" : "times"}.
+      </p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+export default MessageButton;
+```
+
+### What was the issue?
+
+- The JSX contained both display and formatting logic:
+  - The pluralisation logic (`time` vs `times`) was inline.
+- The `onClick` handler had an inline function:
+  - State update logic was not clearly named.
+- The component mixed:
+  - UI structure
+  - Message formatting
+  - Interaction behavior
+
+It still worked, but it was less clear and harder to reuse or test parts of the logic.
+
+## After Refactoring – Small, Focused Functions
+
+I refactored the component by extracting the message formatting and click handler into separate functions.
+
+```jsx
+// src/MessageButton.jsx (after)
+import React, { useState } from "react";
+
+// Generates the message shown to the user based on the current count
+function getClickMessage(count) {
+  const timesLabel = count === 1 ? "time" : "times";
+  return `You have clicked the button ${count} ${timesLabel}.`;
+}
+
+function MessageButton() {
+  const [count, setCount] = useState(0);
+
+  // Handles the button click and updates the state
+  function handleButtonClick() {
+    setCount((previousCount) => previousCount + 1);
   }
 
-  // 2. Calculate total revenue
-  let totalRevenue = 0
-  for (let i = 0; i < validOrders.length; i++) {
-    totalRevenue += validOrders[i].total
-  }
-
-  // 3. Log summary
-  console.log('Number of valid orders:', validOrders.length)
-  console.log('Total revenue:', totalRevenue)
-
-  // 4. Return data
-  return {
-    count: validOrders.length,
-    revenue: totalRevenue,
-  }
+  return (
+    <div>
+      <h1>Focus Bear Test Component</h1>
+      <p data-testid="message">
+        {getClickMessage(count)}
+      </p>
+      <button onClick={handleButtonClick}>
+        Click me
+      </button>
+    </div>
+  );
 }
 
-
-**Problems with this version:**
-
-- The function is doing multiple jobs (filtering, calculating, logging, returning)
-- Harder to test each part separately
-- If I want to reuse “filter valid orders” somewhere else, I would have to copy logic
-- The function is longer and more tiring to read
+export default MessageButton;
+```
 
 
-## After Refactoring: Smaller, Focused Functions
+## How refactoring improved the structure of the code
 
-function getValidOrders(orders) {
-  return orders.filter((order) => order.status === 'paid' && order.total > 0)
-}
+Breaking the component into small functions improved the structure in several ways:
 
-function calculateTotalRevenue(orders) {
-  return orders.reduce((sum, order) => sum + order.total, 0)
-}
+- `getClickMessage(count)`:
+  - Has a single responsibility: build the correct message string.
+  - Can be reused or tested independently without rendering the component.
+- `handleButtonClick()`:
+  - Has a single responsibility: update the state when the button is clicked.
+  - Uses a functional state update for clarity and correctness.
 
-function logOrderSummary(count, revenue) {
-  console.log('Number of valid orders:', count)
-  console.log('Total revenue:', revenue)
-}
+The `MessageButton` component itself now reads like a simple description:
 
-function processOrders(orders) {
-  const validOrders = getValidOrders(orders)
-  const totalRevenue = calculateTotalRevenue(validOrders)
+1. Get the current `count`.
+2. Generate the message from `getClickMessage(count)`.
+3. Render a button that calls `handleButtonClick` when clicked.
 
-  logOrderSummary(validOrders.length, totalRevenue)
+This makes the code:
 
-  return {
-    count: validOrders.length,
-    revenue: totalRevenue,
-  }
-}
+- Easier to understand at a glance.
+- Easier to change (for example, if the message text changes later).
+- Easier to test the non-UI logic separately.
 
 
-## How refactoring improved the structure
+## Summary
 
-- `getValidOrders` only cares about **filtering** orders.
-- `calculateTotalRevenue` is responsible only for **summing totals**.
-- `logOrderSummary` handles **logging**, which can be removed or changed easily later.
-- `processOrders` reads like a **high-level story**: get valid orders → calculate revenue → log → return result.
+Breaking down functions in this example:
 
-This makes the logic:
+- Reduced the amount of logic directly inside JSX.
+- Clearly separated “what to show” (message) from “how it changes” (click handler).
+- Made the component more maintainable and more aligned with clean code practices.
 
-- Much easier to skim and understand
-- Easier to test each function separately
-- Easier to reuse parts (for example, I can reuse `getValidOrders` in another feature)
-- Safer to change, because each function has a clear responsibility
-
-Breaking down long functions into small, focused ones makes the codebase feel more organised and less overwhelming to work with.
+These changes have been committed and pushed as part of the work for Issue #30.
