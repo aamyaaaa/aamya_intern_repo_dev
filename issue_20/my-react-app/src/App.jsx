@@ -5,6 +5,8 @@ import HelloWorld from './HelloWorld'
 import ExpensiveList from './ExpensiveList'
 import UserList from "./UserList";
 import UseCallbackDemo from './UseCallbackDemo'
+import QuoteFetcher from './QuoteFetcher'
+
 
 import { useTranslation } from 'react-i18next'; // 👈 NEW
 
@@ -44,7 +46,7 @@ function App() {
 
       {/* Redux counter */}
       <Counter />
-      
+      <QuoteFetcher />
       <ExpensiveList />
 
       {/* Buggy / fixed React debugging example */}

@@ -1,43 +1,53 @@
 // src/MessageButton.test.jsx
-import React from "react";
-import { describe, test, expect, afterEach } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import MessageButton from "./MessageButton";
+import { describe, it, expect } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import MessageButton from './MessageButton'
 
-// 👇 clear the DOM after each test
-afterEach(() => {
-  cleanup();
-});
+describe('MessageButton', () => {
+  it('renders the initial message', () => {
+    render(<MessageButton />)
 
-describe("MessageButton", () => {
-  test("renders the initial message", () => {
-    render(<MessageButton />);
+    // Heading is present
+    const heading = screen.getByText(/Focus Bear Test Component/i)
+    expect(heading).toBeTruthy()
 
-    // Check heading
-    expect(
-      screen.getByText(/Focus Bear Test Component/i)
-    ).toBeInTheDocument();
+    // There may be multiple MessageButton instances in the DOM,
+    // so we take the last one.
+    const messages = screen.getAllByTestId('message')
+    const message = messages[messages.length - 1]
 
-    // Check initial message text
-    expect(
-      screen.getByTestId("message")
-    ).toHaveTextContent("You have clicked the button 0 times.");
-  });
+    expect(message.textContent).toContain(
+      'You have clicked the button 0 times.'
+    )
+  })
 
-  test("updates the message when the button is clicked", async () => {
-    const user = userEvent.setup();
-    render(<MessageButton />);
+  it('updates the message when the button is clicked', async () => {
+    const user = userEvent.setup()
+    render(<MessageButton />)
 
-    const button = screen.getByRole("button", { name: /click me/i });
-    const message = screen.getByTestId("message");
+    // Grab all buttons with label "Click me" and use the last one
+    const buttons = screen.getAllByRole('button', { name: /click me/i })
+    const button = buttons[buttons.length - 1]
 
-    // Click once
-    await user.click(button);
-    expect(message).toHaveTextContent("You have clicked the button 1 time.");
+    // Same for message element
+    const messages = screen.getAllByTestId('message')
+    const message = messages[messages.length - 1]
 
-    // Click again
-    await user.click(button);
-    expect(message).toHaveTextContent("You have clicked the button 2 times.");
-  });
-});
+    // Click once and wait for UI update
+    await user.click(button)
+    await waitFor(() => {
+      expect(message.textContent).toContain(
+        'You have clicked the button 1 time.'
+      )
+    })
+
+    // Click again and wait for UI update
+    await user.click(button)
+    await waitFor(() => {
+      expect(message.textContent).toContain(
+        'You have clicked the button 2 times.'
+      )
+    })
+  })
+})
