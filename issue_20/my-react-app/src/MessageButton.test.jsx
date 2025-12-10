@@ -9,8 +9,7 @@ describe('MessageButton', () => {
     render(<MessageButton />)
 
     // Heading is present
-    const heading = screen.getByText(/Focus Bear Test Component/i)
-    expect(heading).toBeTruthy()
+const heading = screen.getByText(/Focus Bear PR Learning Component/i);    expect(heading).toBeTruthy()
 
     // There may be multiple MessageButton instances in the DOM,
     // so we take the last one.
