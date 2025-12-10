@@ -14,14 +14,13 @@ function UseEffectDemo() {
 
     return () => {
       console.log("UseEffectDemo unmounted");
-      // Cleanup: abort any in-flight fetch when the component unmounts
       if (fetchControllerRef.current) {
         fetchControllerRef.current.abort();
       }
     };
   }, []);
 
-  // Runs when we decide we want to fetch data
+  // Fetch data when triggered by button click
   useEffect(() => {
     if (!shouldFetch) return;
 
@@ -36,7 +35,7 @@ function UseEffectDemo() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Failed to fetch data");
         }
         return response.json();
       })
@@ -44,7 +43,6 @@ function UseEffectDemo() {
         setData(json);
       })
       .catch((err) => {
-        // Ignore abort errors (they happen when we cancel the request)
         if (err.name !== "AbortError") {
           setError(err.message);
         }
@@ -55,7 +53,6 @@ function UseEffectDemo() {
         fetchControllerRef.current = null;
       });
 
-    // Cleanup if shouldFetch changes again before this completes
     return () => {
       controller.abort();
     };
@@ -66,28 +63,55 @@ function UseEffectDemo() {
   }
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: "1rem", marginTop: "1rem" }}>
+    <div
+      style={{
+        border: "1px solid #30363d",
+        padding: "1.5rem",
+        marginTop: "1rem",
+        borderRadius: "8px",
+        background: "#1a1b26",
+        color: "white",
+        width: "450px",
+      }}
+    >
       <h2>useEffect Demo Component</h2>
       <p>
         This component logs when it mounts/unmounts and fetches data when you
         click the button.
       </p>
 
-      <button onClick={handleFetchClick} disabled={isLoading}>
+      <button
+        onClick={handleFetchClick}
+        disabled={isLoading}
+        style={{
+          color: "#fff",
+          background: "#2563eb",
+          border: "none",
+          padding: "10px 18px",
+          borderRadius: "6px",
+          marginTop: "12px",
+          cursor: isLoading ? "not-allowed" : "pointer",
+          fontSize: "14px",
+        }}
+      >
         {isLoading ? "Fetching..." : "Fetch Post"}
       </button>
 
       {error && (
-        <p style={{ color: "red", marginTop: "0.5rem" }}>
-          Error: {error}
+        <p style={{ color: "#f87171", marginTop: "0.8rem" }}>
+          ❌ Error: {error}
         </p>
       )}
 
       {data && (
-        <div style={{ marginTop: "1rem" }}>
-          <h3>Fetched Post</h3>
-          <p><strong>Title:</strong> {data.title}</p>
-          <p><strong>Body:</strong> {data.body}</p>
+        <div style={{ marginTop: "1.5rem" }}>
+          <h3 style={{ color: "#38bdf8" }}>Fetched Post</h3>
+          <p>
+            <strong>Title:</strong> {data.title}
+          </p>
+          <p>
+            <strong>Body:</strong> {data.body}
+          </p>
         </div>
       )}
     </div>
