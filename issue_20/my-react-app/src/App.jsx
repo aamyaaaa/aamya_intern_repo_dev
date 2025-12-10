@@ -7,6 +7,7 @@ import ExpensiveList from './ExpensiveList'
 import UserList from "./UserList";
 import UseCallbackDemo from './UseCallbackDemo'
 import QuoteFetcher from './QuoteFetcher'
+import UseEffectDemo from './UseEffectDemo'
 import { useTranslation } from 'react-i18next'
 
 // Pages
@@ -29,7 +30,7 @@ function App() {
         <Link to="/">Home</Link>
         <Link to="/profile">Profile</Link>
       </nav>
-
+      <UseEffectDemo />
       {/* Routing Area */}
       <Routes>
         <Route path="/" element={<Home toggleLanguage={toggleLanguage} />} />
