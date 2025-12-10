@@ -1,6 +1,7 @@
 // src/App.jsx
 import { Routes, Route, Link } from "react-router-dom";
 import Counter from './Counter'
+import FormikContactForm from "./FormikContactForm";
 import ParentBuggy from './buggy/ParentBuggy'
 import HelloWorld from './HelloWorld'
 import ExpensiveList from './ExpensiveList'
@@ -31,6 +32,9 @@ function App() {
         <Link to="/profile">Profile</Link>
       </nav>
       <UseEffectDemo />
+      <h1>React Learning Playground</h1>
+      <UseEffectDemo />
+      <FormikContactForm />
       {/* Routing Area */}
       <Routes>
         <Route path="/" element={<Home toggleLanguage={toggleLanguage} />} />
