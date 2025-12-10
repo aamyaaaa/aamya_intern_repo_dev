@@ -10,14 +10,13 @@ Consistent code formatting:
 
 Formatting tools like ESLint and Prettier allow the team to follow the same rules automatically instead of debating style in reviews.
 
-## What issues did the linter detect?
+### Example Issues Detected by ESLint
 
-(Write your real results after running ESLint)
-Some examples could include:
-- Missing semicolons
-- Unused imports
-- Extra spaces or inconsistent indentation
-- Missing default exports or incorrect JSX rules
+- `no-unused-vars` — ESLint flagged an unused translation variable (`t`) in `App.jsx`. I removed it to clean up the code.
+- `no-empty` — An empty loop in `ExpensiveList.jsx` was flagged. Adding a dummy operation inside fixed the issue and clarified the intent of the delay simulation.
+- `no-unused-vars` — ESLint detected that the `err` parameter in `QuoteFetcher.jsx` was unused. I updated the error handling so the variable is now part of the logic.
+
+These issues would not be obvious visually, and fixing them resulted in cleaner and more intentional code.
 
 ## Did formatting the code make it easier to read? How?
 
@@ -29,10 +28,3 @@ Cleaner formatting helped me:
 
 It definitely improves readability and confidence in the codebase.
 
-### Example Issues Detected by ESLint
-
-- `no-unused-vars` — ESLint flagged an unused translation variable (`t`) in `App.jsx`. I removed it to clean up the code.
-- `no-empty` — An empty loop in `ExpensiveList.jsx` was flagged. Adding a dummy operation inside fixed the issue and clarified the intent of the delay simulation.
-- `no-unused-vars` — ESLint detected that the `err` parameter in `QuoteFetcher.jsx` was unused. I updated the error handling so the variable is now part of the logic.
-
-These issues would not be obvious visually, and fixing them resulted in cleaner and more intentional code.
