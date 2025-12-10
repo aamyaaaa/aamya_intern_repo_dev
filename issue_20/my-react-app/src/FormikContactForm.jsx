@@ -26,8 +26,15 @@ function FormikContactForm() {
     },
   });
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting } =
-    formik;
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+  } = formik;
 
   return (
     <div
@@ -47,7 +54,10 @@ function FormikContactForm() {
       <form onSubmit={handleSubmit} noValidate>
         {/* Name field */}
         <div style={{ marginBottom: "1rem" }}>
-          <label htmlFor="name" style={{ display: "block", marginBottom: "0.25rem" }}>
+          <label
+            htmlFor="name"
+            style={{ display: "block", marginBottom: "0.25rem" }}
+          >
             Name
           </label>
           <input
@@ -67,7 +77,13 @@ function FormikContactForm() {
             }}
           />
           {touched.name && errors.name && (
-            <div style={{ color: "#f97373", marginTop: "0.25rem", fontSize: "0.9rem" }}>
+            <div
+              style={{
+                color: "#f97373",
+                marginTop: "0.25rem",
+                fontSize: "0.9rem",
+              }}
+            >
               {errors.name}
             </div>
           )}
@@ -75,7 +91,10 @@ function FormikContactForm() {
 
         {/* Email field */}
         <div style={{ marginBottom: "1rem" }}>
-          <label htmlFor="email" style={{ display: "block", marginBottom: "0.25rem" }}>
+          <label
+            htmlFor="email"
+            style={{ display: "block", marginBottom: "0.25rem" }}
+          >
             Email
           </label>
           <input
@@ -95,7 +114,13 @@ function FormikContactForm() {
             }}
           />
           {touched.email && errors.email && (
-            <div style={{ color: "#f97373", marginTop: "0.25rem", fontSize: "0.9rem" }}>
+            <div
+              style={{
+                color: "#f97373",
+                marginTop: "0.25rem",
+                fontSize: "0.9rem",
+              }}
+            >
               {errors.email}
             </div>
           )}

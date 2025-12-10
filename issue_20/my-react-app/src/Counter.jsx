@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { increment, decrement, reset } from './store/counterSlice'
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement, reset } from "./store/counterSlice";
 
 // Reusable button component with hover + active state
 function ActionButton({ label, onClick, color }) {
@@ -15,16 +15,16 @@ function ActionButton({ label, onClick, color }) {
     >
       {label}
     </button>
-  )
+  );
 }
 
 function Counter() {
-  const count = useSelector((state) => state.counter.value)
-  const dispatch = useDispatch()
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
 
-  const handleIncrement = () => dispatch(increment())
-  const handleDecrement = () => dispatch(decrement())
-  const handleReset = () => dispatch(reset())
+  const handleIncrement = () => dispatch(increment());
+  const handleDecrement = () => dispatch(decrement());
+  const handleReset = () => dispatch(reset());
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-4">
@@ -37,7 +37,7 @@ function Counter() {
         <ActionButton label="Reset" onClick={handleReset} color="gray" />
       </div>
     </div>
-  )
+  );
 }
 
-export default Counter
+export default Counter;

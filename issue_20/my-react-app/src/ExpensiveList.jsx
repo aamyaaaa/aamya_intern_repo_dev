@@ -64,49 +64,59 @@
 
 // export default ExpensiveList
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState } from "react";
 
 // Utility function: Generate numbers from 1 to size
 function generateNumbers(size) {
-  return Array.from({ length: size }, (_, index) => index + 1)
+  return Array.from({ length: size }, (_, index) => index + 1);
 }
 
 // Utility function: Simulated heavy computation
+// Utility function: Simulated heavy computation
 function simulateDelay() {
-  for (let i = 0; i < 500; i++) {}
+  let dummy = 0;
+
+  for (let i = 0; i < 500; i += 1) {
+    dummy += i;
+  }
+
+  // We don't care about `dummy`, this is just to simulate CPU work
+  return dummy;
 }
 
 // Utility function: Count even numbers with delay
 function countEvenNumbers(numbers) {
-  let count = 0
+  let count = 0;
   for (let num of numbers) {
-    simulateDelay()
-    if (num % 2 === 0) count++
+    simulateDelay();
+    if (num % 2 === 0) count++;
   }
-  return count
+  return count;
 }
 
 function ExpensiveList() {
-  const [size, setSize] = useState(5000)
-  const [clicks, setClicks] = useState(0)
+  const [size, setSize] = useState(5000);
+  const [clicks, setClicks] = useState(0);
 
-  const numbers = useMemo(() => generateNumbers(size), [size])
+  const numbers = useMemo(() => generateNumbers(size), [size]);
 
   const evenCount = useMemo(() => {
-    console.log('Running expensive calculation...')
-    return countEvenNumbers(numbers)
-  }, [numbers])
+    console.log("Running expensive calculation...");
+    return countEvenNumbers(numbers);
+  }, [numbers]);
 
   return (
     <div>
       <h2>Expensive List Optimized</h2>
-      <p>Size: {size} — Even: {evenCount}</p>
-      <button onClick={() => setSize(prev => prev + 1000)}>Grow List</button>
-      <button onClick={() => setClicks(prev => prev + 1)}>
+      <p>
+        Size: {size} — Even: {evenCount}
+      </p>
+      <button onClick={() => setSize((prev) => prev + 1000)}>Grow List</button>
+      <button onClick={() => setClicks((prev) => prev + 1)}>
         Random button ({clicks})
       </button>
     </div>
-  )
+  );
 }
 
-export default ExpensiveList
+export default ExpensiveList;

@@ -9,5 +9,5 @@ export default function Home({ toggleLanguage }) {
       </button>
       <p className="text-slate-700">Home Page: Welcome to FocusBear!</p>
     </div>
-  )
+  );
 }

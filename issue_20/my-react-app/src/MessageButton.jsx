@@ -12,7 +12,7 @@ function MessageButton() {
 
   // Handles button clicks
   function handleButtonClick() {
-    setCount(prev => prev + 1);
+    setCount((prev) => prev + 1);
   }
 
   return (
