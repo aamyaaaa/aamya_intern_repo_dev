@@ -1,29 +1,25 @@
 // src/MessageButton.jsx
 import React, { useState } from "react";
 
-// Small, focused function: generates the message text based on count
+// Generates the message shown to the user based on the current count
 function getClickMessage(count) {
-  const timesLabel = count === 1 ? "time" : "times";
-  return `You have clicked the button ${count} ${timesLabel}.`;
+  const label = count === 1 ? "time" : "times";
+  return `You have clicked the button ${count} ${label}.`;
 }
 
 function MessageButton() {
   const [count, setCount] = useState(0);
 
-  // Small, focused function: updates the count
+  // Handles button clicks
   function handleButtonClick() {
-    setCount((previousCount) => previousCount + 1);
+    setCount(prev => prev + 1);
   }
 
   return (
     <div>
-      <h1>Focus Bear Test Component</h1>
-      <p data-testid="message">
-        {getClickMessage(count)}
-      </p>
-      <button onClick={handleButtonClick}>
-        Click me
-      </button>
+      <h1>Focus Bear PR Learning Component</h1>
+      <p data-testid="message">{getClickMessage(count)}</p>
+      <button onClick={handleButtonClick}>Click me</button>
     </div>
   );
 }
