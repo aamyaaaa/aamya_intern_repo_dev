@@ -36,3 +36,17 @@ Another minor issue was the warnings shown in VS Code for `@tailwind` rules, whi
 - How to troubleshoot configuration issues and check whether Tailwind is actually working.
 
 This process helped me understand the connections between React, Vite, Tailwind, and build tools more clearly.
+
+## issue 34
+## Handling State & User Input Reflection
+
+### What happens if we modify state directly instead of using setState?
+If we modify state directly (for example, doing `count = count + 1` instead of
+calling `setCount(count + 1)`), React will not reliably detect that the state
+has changed. Because React doesn’t know a change happened, it may not re-render
+the component, so the UI might not update correctly.
+
+Using the setter function from `useState` (like `setCount`) tells React that the
+state has changed and triggers a re-render in a predictable way. It also helps
+React manage updates efficiently (including batching updates) and keeps the
+component state consistent over time.
