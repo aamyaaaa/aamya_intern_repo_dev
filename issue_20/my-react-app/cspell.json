@@ -1,0 +1,21 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "ignorePaths": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      "package-lock.json"
+    ],
+    "words": [
+      "FocusBear",
+      "Redux",
+      "Formik",
+      "i18n",
+      "Vite",
+      "markdownlint",
+      "cspell",
+      "CI",
+      "CD"
+    ]
+  }
