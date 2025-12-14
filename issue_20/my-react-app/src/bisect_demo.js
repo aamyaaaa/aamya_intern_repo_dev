@@ -9,5 +9,5 @@ export function add(a, b) {
       console.error("FAIL: expected 5, got", result);
       process.exit(1);
     }
-    console.log("PASS");
+    console.log("PASS:add works");
   }
