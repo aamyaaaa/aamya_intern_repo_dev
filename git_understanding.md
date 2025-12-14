@@ -43,3 +43,24 @@ affecting the stable codebase.
 Git keeps the changes separate until the branches are merged. If both developers
 modify the same lines, a merge conflict occurs, which must be manually resolved.
 This ensures that no one’s work is silently overwritten.
+
+## isuue 61
+## Merge Conflicts & Conflict Resolution
+
+### What caused the conflict?
+The conflict happened because the same file (`conflict-demo.txt`) was created/edited
+on both `main` and `issue_53`. When Git tried to merge, it couldn’t automatically
+decide which version of the file to keep (add/add conflict), so it stopped and
+asked for manual resolution.
+
+### How did you resolve it?
+I opened the conflicted file and used the conflict markers (`<<<<<<<`, `=======`,
+`>>>>>>>`) to compare the two versions. I chose the correct final content,
+removed the conflict markers, saved the file, then staged and committed the merge
+resolution.
+
+### What did you learn?
+Merge conflicts are a normal part of collaboration. They happen when changes
+overlap, and Git needs a human decision. Resolving conflicts is about
+understanding both changes and deciding the final correct version. Keeping
+branches small and syncing often helps reduce conflicts.
