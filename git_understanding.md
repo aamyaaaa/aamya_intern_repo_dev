@@ -64,3 +64,25 @@ Merge conflicts are a normal part of collaboration. They happen when changes
 overlap, and Git needs a human decision. Resolving conflicts is about
 understanding both changes and deciding the final correct version. Keeping
 branches small and syncing often helps reduce conflicts.
+
+## issue 40
+## Writing Meaningful Commit Messages Reflection
+
+### What makes a good commit message?
+A good commit message is short but specific, uses the imperative mood (e.g., “Fix”, “Add”),
+and makes it clear what changed and why. Using a consistent structure like Conventional
+Commits (type/scope/summary) makes history easier to scan and automate.
+
+### How does a clear commit message help in team collaboration?
+Clear messages speed up code reviews and debugging because teammates can quickly understand
+the intent of a change without re-reading the full diff. It also helps during handover,
+reverts, and when tracking when/why a behavior was introduced (git blame / history).
+
+### How can poor commit messages cause issues later?
+Vague messages like “fixed stuff” make it difficult to search for changes, identify regressions,
+or safely revert a specific change. Overly detailed messages can also be noisy and reduce the
+signal in commit history, making it harder to scan important changes quickly.
+
+### Open-source observations
+In large repos like React and Node.js, many commit titles are short and descriptive (often using
+prefixes like fix/docs/chore), which makes browsing history efficient and consistent.
