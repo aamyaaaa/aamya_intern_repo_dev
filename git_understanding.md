@@ -86,3 +86,24 @@ signal in commit history, making it harder to scan important changes quickly.
 ### Open-source observations
 In large repos like React and Node.js, many commit titles are short and descriptive (often using
 prefixes like fix/docs/chore), which makes browsing history efficient and consistent.
+
+## issue 60
+## Debugging with git bisect Reflection
+
+### What does git bisect do?
+git bisect is a debugging tool that helps identify the exact commit where a bug
+was introduced. It works by performing a binary search through the commit
+history. By marking commits as “good” (bug not present) or “bad” (bug present),
+git bisect quickly narrows down the first bad commit.
+
+### When would you use it in a real-world debugging situation?
+git bisect is useful when a bug exists in the current version of a project but
+it’s unclear which change caused it, especially when many commits have been
+made. It is particularly effective when there is a clear way to test whether
+the bug exists, such as a failing script or test case.
+
+### How does it compare to manually reviewing commits?
+Manually reviewing commits can be slow and relies on guessing which change might
+be responsible. git bisect is faster and more reliable because it systematically
+reduces the number of commits to check using binary search. This makes it much
+more efficient, even in large repositories with long commit histories.
