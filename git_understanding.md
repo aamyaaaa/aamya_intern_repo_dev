@@ -24,3 +24,22 @@ We stage changes without committing when the work is done but requires a tempora
 * **Switching Context**: We stage our changes before using `git stash` to quickly save and switch branches for an urgent task.
 * **Awaiting Prerequisite**: We wait for a required dependency or another team's merge before finalizing our commit.
 * **Final Testing**: We use the staged state for a final verification check before making the permanent record.
+
+## Branching & Team Collaboration Reflection
+
+### Why is pushing directly to main problematic?
+Pushing directly to the main branch is risky because it can introduce bugs or
+unfinished features into production-ready code. It removes the opportunity for
+code review and makes it harder to track or revert breaking changes, especially
+in team environments.
+
+### How do branches help with reviewing code?
+Branches allow developers to work on features or fixes in isolation. Changes can
+be reviewed through pull requests before being merged into main, ensuring better
+code quality, consistency, and fewer bugs. Reviewers can give feedback without
+affecting the stable codebase.
+
+### What happens if two people edit the same file on different branches?
+Git keeps the changes separate until the branches are merged. If both developers
+modify the same lines, a merge conflict occurs, which must be manually resolved.
+This ensures that no one’s work is silently overwritten.
