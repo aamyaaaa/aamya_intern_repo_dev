@@ -46,5 +46,8 @@ const counterSlice = createSlice({
 // Export reducer actions for React components to dispatch
 export const { increment, decrement, reset } = counterSlice.actions;
 
+// Selector: single source of truth for reading counter value
+export const selectCounterValue = (state) => state.counter.value;
+
 // Export reducer so the store can include this slice
 export default counterSlice.reducer;

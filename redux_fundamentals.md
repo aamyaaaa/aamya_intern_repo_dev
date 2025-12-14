@@ -59,3 +59,12 @@ On the other hand, I would stick with **`useState`** when:
 - Redux is better when state is **global, shared across components, or complex enough** that managing it with only useState becomes hard to maintain.
 
 This task helped me see how Redux Toolkit can simplify global state management and make the state flow in a React app more structured and predictable.
+
+## Issue 33
+### Why selectors are better than directly accessing state
+
+Selectors make state access reusable and consistent across the app. Instead of repeating
+`(state) => state.counter.value` everywhere, we centralise it in one function. This
+improves maintainability (if the state shape changes, we update one place) and keeps
+components cleaner and easier to test. Selectors also pair well with memoization (e.g.,
+Reselect) for performance when derived data becomes complex.
